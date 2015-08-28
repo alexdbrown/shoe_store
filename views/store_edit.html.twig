@@ -1,11 +1,25 @@
 <html>
     <head>
         <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
-        <title>Edit Store</title>
+        <title>Store Info</title>
     </head>
     <body>
         <div class="container">
-            <h1>Edit {{ store.getName }} Store</h1>
+            <h1>{{ stores.getName }}</h1>
+
+            {% if brands is not empty %}
+            <h2>Here are the brands sold at this store:</h2>
+            <ul>
+                {% for brand in brands %}
+                    <li>{{ brand.getName }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+            <h3>Add a brand to this store</h3>
+
+
+            <h2>Edit {{ store.getName }} Store</h2>
 
                 <form action="/stores/{{ store.getId }}" method="post">
                     <input name="_method" type="hidden" value="patch">

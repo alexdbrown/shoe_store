@@ -24,7 +24,7 @@
 
             {% if stores is not empty %}
                 <p>All Stores</p>
-                <ul>
+                    <ul>
                     {% for store in stores %}
                         <li><a href="/stores/{{ store.getId }}/edit">{{ store.getName }}</a></li>
                             <ul>
@@ -32,8 +32,8 @@
                                 <li>{{ store.getPhone }}</li>
                             </ul>
                     {% endfor %}
-                </ul>
-            {% else %}
+                    </ul>
+                    {% else %}
                 <p>Currently no stores selling shoes :(</p>
             {% endif %}
 
