@@ -47,7 +47,7 @@
 
         function getId()
         {
-
+            return $this->id;
         }
         //database methods
         function save()
