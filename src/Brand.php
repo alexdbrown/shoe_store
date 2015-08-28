@@ -5,52 +5,54 @@
         private $id;
 
         function __construct($name, $id = null)
-    {
+        {
         $this->name = $name;
         $this->id = $id;
-    }
+        }
 
-    //getters and setters
-    function getName()
-    {
-        return $this->name;
-    }
+        //getters and setters
+        function getName()
+        {
+            return $this->name;
+        }
 
-    function setName($new_name)
-    {
-        $this->name = (string) $new_name;
-    }
+        function setName($new_name)
+        {
+            $this->name = (string) $new_name;
+        }
 
-    function getId()
-    {
-        return $this->id;
-    }
+        function getId()
+        {
+            return $this->id;
+        }
 
-    //database methods
-    function save()
-    {
+        //database methods
+        function save()
+        {
 
-    }
+        }
 
-    //class interaction methods
-    function addStore($store)
-    {
+        //class interaction methods
+        function addStore($store)
+        {
 
-    }
+        }
 
-    function getStores()
-    {
+        function getStores()
+        {
 
-    }
+        }
 
-    //static methods
-    static function getAll()
-    {
+        //static methods
+        static function getAll()
+        {
 
-    }
+        }
 
-    static function deleteAll()
-    {
+        static function deleteAll()
+        {
 
-    }
+        }
+    }    
+
  ?>
