@@ -22,5 +22,12 @@
         return $app['twig']->render('index.html.twig');
     });
 
+    //Store landing page displaying all stores, incluing a form to add a new store
+    $app->get("/stores", function() use ($app) {
+        return $app['twig']->render('stores.html.twig', array('stores' => Store::getAll()));
+    });
+
+    return $app;
+
 
  ?>
