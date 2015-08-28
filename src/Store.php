@@ -32,7 +32,7 @@
 
         function setLocation($new_location)
         {
-
+            $this->location = (string) $new_location;
         }
 
         function getPhone()
