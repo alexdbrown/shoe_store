@@ -4,7 +4,7 @@
         private $name;
         private $location;
         private $phone;
-        private $id:
+        private $id;
 
         function __construct($name, $location, $phone, $id = null)
         {
@@ -17,7 +17,7 @@
         //getters and setters
         function getName()
         {
-            
+
         }
 
         //database methods
