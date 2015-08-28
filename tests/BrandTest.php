@@ -5,7 +5,7 @@
     * @backupStaticAttributes disabled
     */
 
-    //require_once "src/Store.php";
+    require_once "src/Store.php";
     require_once "src/Brand.php";
 
     $server = 'mysql:host=localhost;dbname=shoes_test';
@@ -17,7 +17,7 @@
     {
         protected function tearDown()
         {
-            //Store::deleteAll();
+            Store::deleteAll();
             Brand::deleteAll();
         }
 

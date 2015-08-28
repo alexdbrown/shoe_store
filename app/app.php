@@ -37,23 +37,70 @@
     //deletes all stores and returns to stores page
     $app->post("/delete_all_stores", function() use ($app) {
         Store::deleteAll();
-        return $app['twig']->render('stores.html.twig', array('stores' =>Store::getAll()));
+        return $app['twig']->render('stores.html.twig', array('stores' => Store::getAll()));
     });
 
     //goes to an update page for a store
-    $app->get("/store/{id}/edit", function($id) use ($app) {
+    $app->get("/stores/{id}/edit", function($id) use ($app) {
         $store = Store::find($id);
         return $app['twig']->render('store_edit.html.twig', array('stores' => $store));
     });
 
+
     //update a store name and return to the store page
-    $app->patch("/store/{id}", function($id) use ($app) {
+    $app->patch("/stores/{id}", function($id) use ($app) {
         $store = Store::find($id);
         $store->update($_POST['name'], $_POST['location'], $_POST['phone']);
-        return $app['twig']->render('stores.html.twig', array('stores' =>Store::getAll()));
+        return $app['twig']->render('stores.html.twig', array('stores' => Store::getAll()));
     });
 
+    //deletes an individual store
+    $app->delete("/stores/{id}/delete", function($id) use ($app) {
+        $store = Store::find($id);
+        $store->delete();
+        return $app['twig']->render('stores.html.twig', array('stores' => Store::getAll()));
+    });
+
+    //lists all brands and allows user to make a new brand
+    $app->get("/brands", function() use ($app) {
+        return $app['twig']->render('brands.html.twig', array('brands' => Brand::getAll()));
+    });
+
+    //adds brand to the list of brands on the page
+    $app->post("/add_brand", function() use ($app) {
+        $brand = new Brand($_POST['name']);
+        $brand->save();
+        return $app['twig']->render('brands.html.twig', array('brands' => Brand::getAll()));
+    });
+
+    //deletes all brands
+    $app->post("/delete_all_brands", function() use ($app) {
+        Brand::deleteAll();
+        return $app['twig']->render('brands.html.twig', array('brands' => Brand::getAll()));
+    });
+
+    // $app->get("/brands/{id}/view", function($id) use ($app) {
+    //     $
+    //
+    // })
+
+
+
     return $app;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
  ?>

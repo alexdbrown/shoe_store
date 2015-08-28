@@ -26,7 +26,7 @@
                 <p>All Stores</p>
                 <ul>
                     {% for store in stores %}
-                        <li><a href="/store/{{ store.getId }}/edit">{{ store.getName }}</a></li>
+                        <li><a href="/stores/{{ store.getId }}/edit">{{ store.getName }}</a></li>
                             <ul>
                                 <li>{{ store.getLocation }}</li>
                                 <li>{{ store.getPhone }}</li>
