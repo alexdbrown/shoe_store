@@ -142,6 +142,26 @@
             $this->assertEquals([], $result);
         }
 
+        function test_updateName()
+        {
+            //Arrange
+            $name = "The Shoe Store";
+            $location = "432 SW Tootsies Ave";
+            $phone = "503-555-5555";
+            $test_store = new Store($name, $location, $phone);
+            $test_store->save();
+
+            $column_to_update = "name";
+            $new_info = "Shoes Shoes Shoes Shoes...";
+
+            //Act
+            $test_store->update($column_to_update, $new_info);
+
+            //Assert
+            $result = Store::getAll();
+            $this->assertEquals("Shoes Shoes Shoes Shoes...", $result[0]->getName());
+        }
+
 
 
     }
