@@ -34,6 +34,23 @@
             //Assert
             $this->assertEquals($name, $result);
         }
+
+        function test_getLocation()
+        {
+            //Arrange
+            $name = "The Shoe Store";
+            $location = "432 SW Tootsies Ave";
+            $phone = "503-555-5555";
+            $test_store = new Store($name, $location, $phone);
+
+            //Act
+            $result = $test_store->getLocation();
+
+            //Assert
+            $this->assertEquals($location, $result);
+        }
+
+
     }
 
  ?>
