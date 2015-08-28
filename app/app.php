@@ -46,6 +46,13 @@
         return $app['twig']->render('store_edit.html.twig', array('stores' => $store));
     });
 
+    //update a store name and return to the store page
+    $app->patch("/store/{id}", function($id) use ($app) {
+        $store = Store::find($id);
+        $store->update($_POST['name'], $_POST['location'], $_POST['phone']);
+        return $app['twig']->render('stores.html.twig', array('stores' =>Store::getAll()));
+    });
+
     return $app;
 
 

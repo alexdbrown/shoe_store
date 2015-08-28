@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
+        <title>Edit Store</title>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Edit Store</h1>
+                <p>Update info for {{ store.getName }} store</p>
+
+                <form action="/store/{{ store.getId }}" method="post">
+                    <input name="_method" type="hidden" value="patch">
+                    <label for="name">New name:</label>
+                    <input id="name" name="name" type="text">
+
+                    <label for="location">New location:</label>
+                    <input id="location" name="location" type="text">
+
+                    <label for="phone">New phone:</label>
+                    <input id="phone" name="phone" type="text">
+
+                <button type="submit" class="btn-success">Update</button>
+            </form>
+            <form action="/store/{{ store.getId }}/delete" method="post">
+                <input name="_method" type="hidden" value="delete">
+                <button type="submit" class="btn-danger">Delete Store</button>
+            </form>
+            <p>Nevermind? Go <a href="/stores">back</a></p>
+        </div>
+    </body>
+</html>

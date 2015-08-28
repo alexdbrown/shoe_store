@@ -12,15 +12,12 @@
                 <form action="/add_store" method="post">
                     <label for="name">Store name</label>
                     <input id="name" name="name" type="text" class="form-control" required>
-                <!-- </form>
-                <form class='form-group'> -->
+
                     <label for="location">Location:</label>
                     <input id="location" name="location" type="text" class="form-control" required>
-                <!-- </form>
-                <form class='form-group'> -->
+
                     <label for="phone">Phone:</label>
                     <input id="phone" name="phone" type="text" class="form-control" required>
-                <!-- </form> -->
 
                     <button type="submit" class="btn btn-primary">Add Store</button>
                 </form>
@@ -29,7 +26,7 @@
                 <p>All Stores</p>
                 <ul>
                     {% for store in stores %}
-                        <li><a href="/stores/{{ stores.getId }}">{{ store.getName }}</a></li>
+                        <li><a href="/store/{{ store.getId }}/edit">{{ store.getName }}</a></li>
                             <ul>
                                 <li>{{ store.getLocation }}</li>
                                 <li>{{ store.getPhone }}</li>
