@@ -19,11 +19,11 @@ $ composer install
 * Import sql.zip files to PHPMyAdmin or follow along with the command line steps below:
 ```console
 >CREATE DATABASE shoe_store;
->USE shoe_store;
+>USE shoes;
 >CREATE TABLE stores (id serial PRIMARY KEY, name VARCHAR (255), location VARCHAR (255), phone VARCHAR (255));
 >CREATE TABLE brands (id serial PRIMARY KEY, name VARCHAR (255));
 >CREATE TABLE stores_brands (id serial PRIMARY KEY, store_id bigint(20)UNSIGNED, brand_id bigint(20)UNSIGNED);
--in PHPMyAdmin copy the shoe_store database and create a shoe_store_test database
+-in PHPMyAdmin copy the shoes database and create a shoes_test database
 ```
 
 * Start Apache server with the following command:
