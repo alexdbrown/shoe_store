@@ -22,12 +22,12 @@
 
         function setName($new_name)
         {
-
+            $this->name = (string) $new_name;
         }
 
         function getLocation()
         {
-
+            return $this->location;
         }
 
         function setLocation($new_location)
