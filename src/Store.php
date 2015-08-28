@@ -52,7 +52,10 @@
         //database methods
         function save()
         {
-
+            $GLOBALS['DB']->exec("INSERT INTO stores (name, location, phone) VALUES (
+                '{$this->getName()}', '{$this->getLocation()}', '{$this->getPhone()}'
+            );");
+            $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
         function update()
@@ -79,7 +82,17 @@
         //static methods
         static function getAll()
         {
-
+            $stores_query = $GLOBALS['DB']->query("SELECT * FROM stores;");
+            $all_stores = array();
+            foreach ($stores_query as $store) {
+                $name = $store['name'];
+                $location = $store['location'];
+                $phone = $store['phone'];
+                $id = $store['id'];
+                $new_store = new Store($name, $location, $phone, $id);
+                array_push($all_stores, $new_store);
+            }
+            return $all_stores;
         }
 
         static function deleteAll()
