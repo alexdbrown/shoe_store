@@ -27,6 +27,8 @@
         return $app['twig']->render('stores.html.twig', array('stores' => Store::getAll()));
     });
 
+
+
     return $app;
 
 
