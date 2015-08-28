@@ -1,7 +1,7 @@
 <html>
     <head>
         <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
-        <title>SHoes</title>
+        <title>Shoes</title>
     </head>
     <body>
         <div class='container'>
@@ -9,36 +9,39 @@
 
             <p>Add a Shoe Store<p>
 
-            <form action="/add_store" method="post">
-                <form class='form-group'>
+                <form action="/add_store" method="post">
                     <label for="name">Store name</label>
                     <input id="name" name="name" type="text" class="form-control" required>
-                </form>
-                <form class='form-group'>
+                <!-- </form>
+                <form class='form-group'> -->
                     <label for="location">Location:</label>
                     <input id="location" name="location" type="text" class="form-control" required>
-                </form>
-                <form class='form-group'>
+                <!-- </form>
+                <form class='form-group'> -->
                     <label for="phone">Phone:</label>
                     <input id="phone" name="phone" type="text" class="form-control" required>
+                <!-- </form> -->
+
+                    <button type="submit" class="btn btn-primary">Add Store</button>
                 </form>
-                <button type="submit" class="btn btn-primary">Add Store</button>
-            </form>
 
             {% if stores is not empty %}
                 <p>All Stores</p>
                 <ul>
                     {% for store in stores %}
-                        <li><a href="/store/{{ store.getId }}/edit">{{ store.getName }}</a></li>
+                        <li><a href="/stores/{{ stores.getId }}">{{ store.getName }}</a></li>
+                            <ul>
+                                <li>{{ store.getLocation }}</li>
+                                <li>{{ store.getPhone }}</li>
+                            </ul>
                     {% endfor %}
                 </ul>
             {% else %}
-                <br></br>
                 <p>Currently no stores selling shoes :(</p>
             {% endif %}
 
-            <form action="/delete_all_shoes" method="post">
-                <button type="submit" class="btn-danger">Clear all stores</button>
+            <form action="/delete_all_stores" method="post">
+                <button type="submit" class="btn btn-danger">Clear all stores</button>
             </form>
         </div>
     </body>

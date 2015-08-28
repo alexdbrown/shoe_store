@@ -183,6 +183,22 @@
             $this->assertEquals("100 Whatever Lane", $result[0]->getLocation());
         }
 
+        function test_find()
+        {
+            //Arrange
+            $name = "The Shoe Store";
+            $location = "432 SW Tootsies Ave";
+            $phone = "503-555-5555";
+            $test_store = new Store($name, $location, $phone);
+            $test_store->save();
+
+            //Act
+            $result = Store::find($test_store->getId());
+
+            //Assert
+            $this->assertEquals($test_store, $result);
+        }
+
 
         function test_delete()
         {
