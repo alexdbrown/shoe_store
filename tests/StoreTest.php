@@ -183,6 +183,30 @@
         }
 
 
+        function test_delete()
+        {
+            //Arrange
+            $name = "The Shoe Store";
+            $location = "432 SW Tootsies Ave";
+            $phone = "503-555-5555";
+            $test_store = new Store($name, $location, $phone);
+            $test_store->save();
+
+            $name2 = "Boots n Stuff";
+            $location2 = "900 WalkAlot Blvd.";
+            $phone2 = "971-202-0292";
+            $test_store2 = new Store($name, $location, $phone);
+            $test_store2->save();
+
+            //Act
+            $test_store->delete();
+
+            //Assert
+            $result = Store::getAll();
+            $this->assertEquals($test_store2, $result[0]);
+        }
+
+
 
     }
 
