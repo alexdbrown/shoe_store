@@ -65,6 +65,22 @@
             $this->assertEquals($phone, $result);
         }
 
+        function test_getId()
+        {
+            //Arrange
+            $name = "The Shoe Store";
+            $location = "432 SW Tootsies Ave";
+            $phone = "503-555-5555";
+            $id = 1;
+            $test_store = new Store($name, $location, $phone, $id);
+
+            //Act
+            $result = $test_store->getId();
+
+            //Assert
+            $this->assertEquals($id, $result);
+        }
+
 
 
     }
