@@ -58,9 +58,9 @@
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
-        function update()
+        function update($column_to_update, $new_info)
         {
-
+            $GLOBALS['DB']->exec("UPDATE stores SET {$column_to_update} = '{$new_info}' WHERE id = {$this->getId()};");
         }
 
         function delete()
