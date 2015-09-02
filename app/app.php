@@ -19,7 +19,7 @@
 
     //homepage with options to view stores and brands
     $app->get("/", function() use ($app) {
-        return $app['twig']->render('index.html.twig'array('stores' => Store::getAll(), 'brands' => Brand::getAll()));
+        return $app['twig']->render('index.html.twig');
     });
 
     //Store landing page displaying all stores, incluing a form to add a new store
@@ -46,11 +46,10 @@
         return $app['twig']->render('store_edit.html.twig', array('store' => $store, 'stores' => Store::getAll(), 'brands' => Brand::getAll()));
     });
 
-
     //update a store name and return to the store page
     $app->patch("/stores/{id}", function($id) use ($app) {
         $store = Store::find($id);
-        $store->update($_POST['name'], $_POST['location'], $_POST['phone']);
+        $updated_store = $store->update($_POST['name'], $_POST['location'], $_POST['phone']);
         return $app['twig']->render('stores.html.twig', array('stores' => Store::getAll(), 'brands' => Brand::getAll()));
     });
 
@@ -79,10 +78,17 @@
         return $app['twig']->render('brands.html.twig', array('brands' => Brand::getAll()));
     });
 
-    // $app->get("/brands/{id}/view", function($id) use ($app) {
-    //     $
-    //
-    // })
+    //takes user to an individual brand that lists all stores
+    $app->get("/brands/{id}/view", function($id) use ($app) {
+        $brand = Brand::find($id);
+        $store = Store::getAll();
+        return $app['twig']->render('brands_in_store.html.twig', array('brand' => $brand, 'store' => Store::getAll()));
+    });
+
+    //posts a new store to a brand on individual brand page
+    $app->post("/brands/{id}", function ($id) use ($app) {
+        $brand
+    });
 
 
     return $app;
