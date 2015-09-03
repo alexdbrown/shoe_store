@@ -8,18 +8,38 @@
             <h1>{{ brand.getName }} Homepage</h1>
 
             {% if stores is not empty %}
+<<<<<<< HEAD
             <h3>Here are the stores that sell this brand:</h3>
             <ul>
                 {% for store in stores %}
                     <li><a href="//stores/{{ store.getId }}/view">{{ store.getName }}</a></li>
+=======
+            <h4>Here are the stores selling this brand:</h4>
+            <ul>
+                {% for store in stores %}
+                    <li><a href="/store/{{ store.getId }}">{{ store.getName }}</a></li>
+>>>>>>> 23e3e94794f16a54c0c45f165b5905c414ef9901
                 {% endfor %}
             </ul>
             {% endif %}
 
+<<<<<<< HEAD
             <form action="/brand/{{ brand.getId }}/delete" method="post">
                 <input name="_method" type="hidden" value="delete">
                 <button type="submit" class="btn-danger">Delete Brand</button>
             </form>
+=======
+            <h4>Add a store that sells this brand</h4>
+
+                <form action"/add_brand/{{ brand.getId }}" method="post">
+                    <input name="_method" type="hidden" value="patch">
+                    <label for="store_name">Store name:</label>
+                    <input id="store_name" name="store_name" type="text">
+
+                    <button type="submit" class="btn btn-warning">add</button>
+                </form>
+
+>>>>>>> 23e3e94794f16a54c0c45f165b5905c414ef9901
             <p>Nevermind? Go <a href="/brands">back</a></p>
         </div>
     </body>
