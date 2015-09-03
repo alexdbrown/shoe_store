@@ -45,16 +45,17 @@
     $app->get("/stores/{id}/edit", function($id) use ($app) {
         $store = Store::find($id);
         $brands = $store->getBrands();
-        return $app['twig']->render('store_edit.html.twig', array('store' => $store,'brands' => Brand::getAll()));
+        return $app['twig']->render('store_edit.html.twig', array('store' => $store,'brands' => $brands, 'all_brands' => Brand::getAll()));
     });
 
     //update a store name and return to the store page
     $app->patch("/stores/{id}/edit", function($id) use ($app) {
         $store = Store::find($id);
-        $name = $_POST['name'];
-        $location = $_POST['location'];
-        $phone = $_POST['phone'];
-        $store->update($name, $location, $phone);
+        foreach ($_POST as $key => $value) {
+            if (!empty($value)) {
+                $store->update($key, $value);
+            }
+        }
         $brand = $store->getBrands();
         return $app['twig']->render('stores.html.twig', array('stores' => Store::getAll(), 'brands' => $store->getBrands(), 'all_brands' => Brand::getAll()));
     });
@@ -93,6 +94,13 @@
         return $app['twig']->render('brands.html.twig', array('brands' => Brand::getAll()));
     });
 
+
+    $app->get("/brands/{id}/view", function($id) use ($app) {
+        $brand = Brand::find($id);
+        $stores->getStores();
+        return $app['twig']->render('brands_in_store.html.twig', array('brand' => $brand, 'stores' => $stores));
+    });
+
     //takes user to an individual brand that lists all stores
     $app->get("/brands/{id}", function($id) use ($app) {
         $brand = Brand::find($id);
@@ -109,23 +117,6 @@
         $new_store->save();
         return $app['twig']->render('brands_in_store.html.twig', array('brand' => $brand, 'stores' => $brand->getStores(), 'all_stores' => Store::getAll()));
     });
-
-
     return $app;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
  ?>
