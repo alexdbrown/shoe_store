@@ -5,7 +5,7 @@
 
     $app = new Silex\Application();
 
-    $server = 'mysql:host=localhost;dbname=shoes';
+    $server = 'mysql:host=localhost:8889;dbname=shoes';
     $username = 'root';
     $password = 'root';
     $DB = new PDO($server, $username, $password);
@@ -19,7 +19,7 @@
 
     //homepage with options to view stores and brands
     $app->get("/", function() use ($app) {
-        return $app['twig']->render('index.html.twig'array('stores' => Store::getAll(), 'brands' => Brand::getAll()));
+        return $app['twig']->render('index.html.twig');
     });
 
     //Store landing page displaying all stores, incluing a form to add a new store
@@ -79,10 +79,11 @@
         return $app['twig']->render('brands.html.twig', array('brands' => Brand::getAll()));
     });
 
-    // $app->get("/brands/{id}/view", function($id) use ($app) {
-    //     $
-    //
-    // })
+    $app->get("/brands/{id}/view", function($id) use ($app) {
+        $brand = Brand::find($id);
+        $stores->getStores();
+        return $app['twig']->render('brands_in_store.html.twig', array('brand' => $brand, 'stores' => $stores));
+    });
 
 
     return $app;
