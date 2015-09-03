@@ -23,7 +23,7 @@
                     <label for="store_id">Store name:</label>
                     <select id="store_id" name="store_id" type="text">
                         {% for store in all_stores %}
-                            <option value="{{ store.getId }}"?>{{ store.getName }}</option>
+                            <option value="{{ store.getId }}">{{ store.getName }}</option>
                         {% endfor %}
                     </select>
                     <button type="submit" class="btn btn-warning">add</button>

@@ -49,7 +49,7 @@
     });
 
     //update a store name and return to the store page
-    $app->patch("/stores/{id}", function($id) use ($app) {
+    $app->patch("/stores/{id}/edit", function($id) use ($app) {
         $store = Store::find($id);
         $name = $_POST['name'];
         $location = $_POST['location'];
