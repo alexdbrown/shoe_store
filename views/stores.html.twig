@@ -7,7 +7,7 @@
         <div class='container'>
             <h1>OMG Shoes Store Headquarters!</h1>
 
-            <p>Add a Shoe Store<p>
+            <h3>Add a Store</h3>
 
                 <form action="/add_store" method="post">
                     <label for="name">Store name</label>
@@ -23,7 +23,7 @@
                 </form>
 
             {% if stores is not empty %}
-                <p>All Stores</p>
+                <h3>All Stores</h3>
                     <ul>
                     {% for store in stores %}
                         <li><a href="/stores/{{ store.getId }}/edit">{{ store.getName }}</a></li>
@@ -40,6 +40,7 @@
             <form action="/delete_all_stores" method="post">
                 <button type="submit" class="btn btn-danger">Clear all stores</button>
             </form>
+            <p>Go <a href="/">back</a></p>
         </div>
     </body>
 </html>

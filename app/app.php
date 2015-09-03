@@ -5,7 +5,7 @@
 
     $app = new Silex\Application();
 
-    $server = 'mysql:host=localhost;dbname=shoes';
+    $server = 'mysql:host=localhost:8889;dbname=shoes';
     $username = 'root';
     $password = 'root';
     $DB = new PDO($server, $username, $password);
@@ -24,7 +24,8 @@
 
     //Store landing page displaying all stores, incluing a form to add a new store
     $app->get("/stores", function() use ($app) {
-        return $app['twig']->render('stores.html.twig', array('stores' => Store::getAll(), 'brands' => Brand::getAll()));
+        $all_stores = Store::getAll();
+        return $app['twig']->render('stores.html.twig', array('stores' => $all_stores));
     });
 
     //adds a store to the list of stores on the same page
@@ -43,33 +44,47 @@
     //goes to an update page for a store
     $app->get("/stores/{id}/edit", function($id) use ($app) {
         $store = Store::find($id);
-        return $app['twig']->render('store_edit.html.twig', array('store' => $store, 'stores' => Store::getAll(), 'brands' => Brand::getAll()));
+        $brands = $store->getBrands();
+        return $app['twig']->render('store_edit.html.twig', array('store' => $store,'brands' => Brand::getAll()));
     });
 
     //update a store name and return to the store page
     $app->patch("/stores/{id}", function($id) use ($app) {
         $store = Store::find($id);
-        $updated_store = $store->update($_POST['name'], $_POST['location'], $_POST['phone']);
-        return $app['twig']->render('stores.html.twig', array('stores' => Store::getAll(), 'brands' => Brand::getAll()));
+        $name = $_POST['name'];
+        $location = $_POST['location'];
+        $phone = $_POST['phone'];
+        $store->update($name, $location, $phone);
+        $brand = $store->getBrands();
+        return $app['twig']->render('stores.html.twig', array('stores' => Store::getAll(), 'brands' => $store->getBrands(), 'all_brands' => Brand::getAll()));
+    });
+
+    //adds a brand to a store
+    $app->post("/stores/{id}/add_brand", function($id) use ($app) {
+        $store = Store::find($_POST['store_id']);
+        $brand = Brand::find($_POST['brand_id']);
+        $store->addBrand($brand);
+        return $app['twig']->render('stores.html.twig', array('stores' => Store::getAll(), 'brands' => $store->getBrands(), 'all_brands' => Brand::getAll()));
     });
 
     //deletes an individual store
     $app->delete("/stores/{id}/delete", function($id) use ($app) {
         $store = Store::find($id);
         $store->delete();
-        return $app['twig']->render('stores.html.twig', array('stores' => Store::getAll(), 'brands' => Brand::getAll()));
+        return $app['twig']->render('stores.html.twig', array('stores' => Store::getAll()));
     });
 
     //lists all brands and allows user to make a new brand
     $app->get("/brands", function() use ($app) {
-        return $app['twig']->render('brands.html.twig', array('brands' => Brand::getAll(), 'brands' => Brand::getAll()));
+        $all_brands = Brand::getAll();
+        return $app['twig']->render('brands.html.twig', array('brands' => $all_brands));
     });
 
     //adds brand to the list of brands on the page
     $app->post("/add_brand", function() use ($app) {
         $brand = new Brand($_POST['name']);
         $brand->save();
-        return $app['twig']->render('brands.html.twig', array('brands' => Brand::getAll(), 'brands' => Brand::getAll()));
+        return $app['twig']->render('brands.html.twig', array('brands' => Brand::getAll()));
     });
 
     //deletes all brands
@@ -79,15 +94,20 @@
     });
 
     //takes user to an individual brand that lists all stores
-    $app->get("/brands/{id}/view", function($id) use ($app) {
+    $app->get("/brands/{id}", function($id) use ($app) {
         $brand = Brand::find($id);
-        $store = Store::getAll();
-        return $app['twig']->render('brands_in_store.html.twig', array('brand' => $brand, 'store' => Store::getAll()));
+        $store_selling_brands = $brand->getStores();
+        return $app['twig']->render('brands_in_store.html.twig', array('brand' => $brand, 'store' => $store_selling_brands, 'all_stores' => Store::getAll()));
     });
 
-    //posts a new store to a brand on individual brand page
+    //adds store to a brand on individual brand page
     $app->post("/brands/{id}", function ($id) use ($app) {
-        $brand
+        $brand = Brand::find($_POST['brand_id']);
+        $store = Store::find($_POST['store_id']);
+        $brand->addStore($store);
+        $new_store = new Store($_POST['name'], $_POST['location'], $_POST['phone']);
+        $new_store->save();
+        return $app['twig']->render('brands_in_store.html.twig', array('brand' => $brand, 'stores' => $brand->getStores(), 'all_stores' => Store::getAll()));
     });
 
 

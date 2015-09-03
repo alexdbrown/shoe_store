@@ -7,7 +7,7 @@
         <div class="container">
             <h1>OMG Shoes Store Headquarters!</h1>
 
-            <p>Add a Brand<p>
+            <h3>Add a Brand</h3>
 
                 <form action="/add_brand" method="post">
                     <label for="name">Brand name</label>
@@ -20,7 +20,7 @@
                 <p>All Brands</p>
                 <ul>
                     {% for brand in brands %}
-                        <li><a href="/brands/{{ brand.getId }}/view">{{ brand.getName }}</a></li>
+                        <li><a href="/brands/{{ brand.getId }}">{{ brand.getName }}</a></li>
                     {% endfor %}
                 </ul>
             {% else %}
@@ -31,8 +31,7 @@
             <form action="/delete_all_brands" method="post">
                 <button type="submit" class="btn btn-danger">Clear all brands</button>
             </form>
-        </div>
-
+            <p>Go <a href="/">back</a></p>
         </div>
     </body>
 </html>
